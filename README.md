@@ -1,6 +1,6 @@
-# YAGO4-65k
+# YAGO4-18k
 
-Link prediction dataset based on YAGO4 with the following files in ``YAGO4-65k/``
+Link prediction dataset based on YAGO4 with the following files in ``YAGO4-18k/``
 
 * ``rel2id.txt``: tab-separated file in which each line associates a relation URI to its equivalent ID
 * ``rel2id.pkl``: pickle file containing a dictionary associating a relation URI to its equivalent ID
@@ -197,7 +197,7 @@ all_types = set(type1, type2, type3, ...)
 ## 8. ``prepare_dataset.py``
 
 ```python
-python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples data/triples.pkl --additional_triples data/cleaned_additional_triples.pkl --superclasses data/superclasses.pkl --rel_3si data/rel_3si.pkl --relations data/yago-relations.csv --output YAGO4-65k
+python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples data/triples.pkl --additional_triples data/cleaned_additional_triples.pkl --superclasses data/superclasses.pkl --rel_3si data/rel_3si.pkl --relations data/yago-relations.csv --output YAGO4-18k
 ```
 
 Build the YAGO4-100k dataset whose files are described at the beginning of this document.

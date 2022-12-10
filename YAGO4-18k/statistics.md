@@ -1,4 +1,4 @@
-# YAGO4-65k statistics
+# YAGO4-18k statistics
 
 | Set   | Triples | Entities | Relations | Types |
 |-------|---------|----------|-----------|-------|
