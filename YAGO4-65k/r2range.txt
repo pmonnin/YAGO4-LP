@@ -1,0 +1,6 @@
+http://schema.org/partOfSeason	http://schema.org/CreativeWorkSeason
+http://schema.org/signOrSymptom	http://schema.org/MedicalSignOrSymptom
+http://bioschemas.org/encodesBioChemEntity	http://bioschemas.org/BioChemEntity
+http://schema.org/connectedTo	http://schema.org/AnatomicalStructure
+http://schema.org/illustrator	http://schema.org/Person
+http://schema.org/relevantSpecialty	http://schema.org/MedicalSpecialty
