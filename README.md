@@ -200,5 +200,5 @@ all_types = set(type1, type2, type3, ...)
 python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples data/triples.pkl --additional_triples data/cleaned_additional_triples.pkl --superclasses data/superclasses.pkl --rel_3si data/rel_3si.pkl --relations data/yago-relations.csv --output YAGO4-18k
 ```
 
-Build the YAGO4-100k dataset whose files are described at the beginning of this document.
+Build the YAGO4-65k dataset whose files are described at the beginning of this document.
 
