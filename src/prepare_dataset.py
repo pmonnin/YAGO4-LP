@@ -207,7 +207,7 @@ def keep_direct_hierarchy(class2allsuperclasses):
 
 def get_number_of_entities_from_triple_set(triple_set):
     entities = {t[0] for t in triple_set}
-    entities.union(t[2] for t in triple_set)
+    entities = entities.union(t[2] for t in triple_set)
 
     return len(entities)
 

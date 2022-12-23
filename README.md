@@ -1,6 +1,6 @@
-# YAGO4-18k
+# YAGO4-LP
 
-Link prediction dataset based on YAGO4 with the following files in ``YAGO4-18k/``
+Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/`` et ``YAGO4-XXk/``
 
 * ``rel2id.txt``: tab-separated file in which each line associates a relation URI to its equivalent ID
 * ``rel2id.pkl``: pickle file containing a dictionary associating a relation URI to its equivalent ID
@@ -51,6 +51,8 @@ Link prediction dataset based on YAGO4 with the following files in ``YAGO4-18k/`
 * ``classID2directsuperclassIDs.txt``: tab-separated file in which each line associates a class ID to the ID of one of its direct superclasses
 * ``classID2directsuperclassIDs.pkl``: pickle file containing a dictionary associating a class ID to the list of the IDs of its direct superclasses
 * ``statistics.md``: a file containing statistics for the dataset
+* ``additonal_rels.csv``: a CSV file indicating which relations were considered when querying and cleaning additional triples to constitute the train set
+* ``yago-relations.csv``: a CSV file containing YAGO relations with their domain, range, number of triples and whether they are considered in the valid/test set
 
 The following commands have been used to build the dataset:
 
@@ -70,7 +72,7 @@ Output:
   * \# triples: indicating the number of triples of involving the predicate
   * In valid/test set: boolean to consider or not the predicate to build the valid/test sets in scripts described below
 
-We selected 6 relations of interest (set to True in ``data/yago-relations.csv``).
+We selected some relations of interest (set to True in ``YAGO4-XXk/yago-relations.csv``).
 
 ## 2. ``get_rel_triples.py``
 
@@ -100,11 +102,11 @@ entities_batches[batch number] = list(entity1, entity2, ...)
 ## 3. ``get_additional_triples.py``
 
 ```python
-python src/get_additional_triples.py --batch 0 --entities data/entities.pkl --triples data/additional_triples_b0.pkl
-python src/get_additional_triples.py --batch 1 --entities data/entities.pkl --triples data/additional_triples_b1.pkl
-python src/get_additional_triples.py --batch 2 --entities data/entities.pkl --triples data/additional_triples_b2.pkl
-python src/get_additional_triples.py --batch 3 --entities data/entities.pkl --triples data/additional_triples_b3.pkl
-python src/get_additional_triples.py --batch 4 --entities data/entities.pkl --triples data/additional_triples_b4.pkl
+python src/get_additional_triples.py --batch 0 --entities data/entities_in_rels.pkl --triples data/additional_triples_b0.pkl
+python src/get_additional_triples.py --batch 1 --entities data/entities_in_rels.pkl --triples data/additional_triples_b1.pkl
+python src/get_additional_triples.py --batch 2 --entities data/entities_in_rels.pkl --triples data/additional_triples_b2.pkl
+python src/get_additional_triples.py --batch 3 --entities data/entities_in_rels.pkl --triples data/additional_triples_b3.pkl
+python src/get_additional_triples.py --batch 4 --entities data/entities_in_rels.pkl --triples data/additional_triples_b4.pkl
 ```
 
 Get additional triples for entities appearing in triples involving the relations of interest. 
@@ -182,7 +184,7 @@ entity_types[entity] = set(type1, type2, ...)
 python src/merge_types.py --entity_types data/types_* --output_entity_types data/entity_types.pkl --output_types data/all_types.pkl
 ```
 
-Merge batches of types into one dictionary and get all types in a set for query superclasses
+Merge batches of types into one dictionary and get all types in a set to query superclasses
 
 Output:
 * A pickle file ``entity_types.pkl`` containing a dictionary such that
@@ -194,11 +196,27 @@ entity_types[entity] = set(type1, type2, ...)
 all_types = set(type1, type2, type3, ...)
 ```
 
-## 8. ``prepare_dataset.py``
+## 8. ``get_superclasses.py``
 
 ```python
-python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples data/triples.pkl --additional_triples data/cleaned_additional_triples.pkl --superclasses data/superclasses.pkl --rel_3si data/rel_3si.pkl --relations data/yago-relations.csv --output YAGO4-18k
+python src/get_superclasses.py --types data/all_types.pkl --superclasses data/superclasses.pkl
 ```
 
-Build the YAGO4-65k dataset whose files are described at the beginning of this document.
+Get superclasses of all types
+
+Output:
+
+* A pickle file ``superclasses.pkl`` containing a dictionary such that
+```
+superclasses[type1] = set(superclass1, superclass2, superclass3, ...)
+```
+Note that superclasses are computed taking into account the transitive closure of the subsumption relation
+
+## 9. ``prepare_dataset.py``
+
+```python
+python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples data/triples.pkl --additional_triples data/cleaned_additional_triples.pkl --superclasses data/superclasses.pkl --rel_3si data/rel_3si.pkl --relations data/yago-relations.csv --output YAGO4-XXk
+```
+
+Build the YAGO4-XXk dataset whose files are described at the beginning of this document.
 

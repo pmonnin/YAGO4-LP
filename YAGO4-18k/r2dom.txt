@@ -1,6 +1,0 @@
-http://schema.org/partOfSeason	http://schema.org/Episode
-http://schema.org/signOrSymptom	http://schema.org/MedicalCondition
-http://bioschemas.org/encodesBioChemEntity	http://bioschemas.org/Gene
-http://schema.org/connectedTo	http://schema.org/AnatomicalStructure
-http://schema.org/illustrator	http://schema.org/Book
-http://schema.org/relevantSpecialty	http://schema.org/MedicalEntity
