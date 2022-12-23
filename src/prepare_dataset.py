@@ -235,7 +235,7 @@ def compute_statistics(train_set_uris, valid_set_uris, test_set_uris, ent2classe
     ]
 
     with open(file_path, "w") as file:
-        file.write("# YAGO4-65k statistics\n")
+        file.write("# YAGO4-" + str(int(get_number_of_entities_from_triple_set(sets[0][1]) / 1000)) + "k statistics\n")
 
         file.write("| Set | Triples | Entities | Relations | Types |\n")
         file.write("|-------|---------|----------|-----------|-------|\n")

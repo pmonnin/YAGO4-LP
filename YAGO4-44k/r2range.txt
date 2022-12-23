@@ -1,0 +1,11 @@
+http://schema.org/affiliation	http://schema.org/Organization
+http://schema.org/owns	http://schema.org/Product
+http://schema.org/editor	http://schema.org/Person
+http://schema.org/partOfSeason	http://schema.org/CreativeWorkSeason
+http://schema.org/signOrSymptom	http://schema.org/MedicalSignOrSymptom
+http://schema.org/locationCreated	http://schema.org/Place
+http://schema.org/citation	http://schema.org/CreativeWork
+http://bioschemas.org/encodesBioChemEntity	http://bioschemas.org/BioChemEntity
+http://schema.org/connectedTo	http://schema.org/AnatomicalStructure
+http://schema.org/illustrator	http://schema.org/Person
+http://schema.org/relevantSpecialty	http://schema.org/MedicalSpecialty
