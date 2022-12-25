@@ -1,6 +1,6 @@
 # YAGO4-LP
 
-Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/``, ``YAGO4-44k/``, and ``YAGO4-91k``.
+Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/``, ``YAGO4-44k/``, and ``YAGO4-77k``.
 
 * ``rel2id.txt``: tab-separated file in which each line associates a relation URI to its equivalent ID
 * ``rel2id.pkl``: pickle file containing a dictionary associating a relation URI to its equivalent ID
@@ -69,10 +69,10 @@ Output:
   * Predicate: indicating the predicate URI
   * Domain: indicating the predicate domain
   * Range: indicating the predicate range
-  * \# triples: indicating the number of triples of involving the predicate
-  * In valid/test set: boolean to consider or not the predicate to build the valid/test sets in scripts described below
+  * \# triples: indicating the number of triples involving the predicate
+  * In valid/test set: number of triples of this relation to add to build the train/valid/test sets in scripts described below
 
-We selected some relations of interest (set to True in ``YAGO4-XXk/yago-relations.csv``).
+We selected some relations of interest (with their number of triples set > 0 in ``YAGO4-XXk/yago-relations.csv``).
 
 ## 2. ``get_rel_triples.py``
 
