@@ -31,7 +31,7 @@ def main():
         results = yago_endpoint.queryAndConvert()
 
         for r in results["results"]["bindings"]:
-            relations.append([r["pred"]["value"], r["domain"]["value"], r["range"]["value"], 0, False])
+            relations.append([r["pred"]["value"], r["domain"]["value"], r["range"]["value"], 0, 0])
 
         for r in tqdm.tqdm(relations):
             yago_endpoint.setQuery(f"""

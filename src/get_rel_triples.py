@@ -2,6 +2,7 @@ import argparse
 import csv
 import math
 import pickle
+import random
 
 import SPARQLWrapper
 import tqdm
@@ -39,10 +40,10 @@ def main():
         csvreader = csv.reader(csvfile, delimiter=',')
         next(csvreader)
         for r in csvreader:
-            relations.append([r[0], r[1], r[2], int(r[3]), r[4] == "True"])
+            relations.append([r[0], r[1], r[2], int(r[3]), int(r[4])])
 
     for r in tqdm.tqdm(relations):
-        if r[4]:
+        if r[4] > 0:
             # Test symmetry
             yago_endpoint.setQuery(f"""
                 ASK 
@@ -111,11 +112,17 @@ def main():
                 """)
             results = yago_endpoint.queryAndConvert()
 
-            triples[r[0]] = set()
+            temp_triples = set()
             for t in results["results"]["bindings"]:
-                triples[r[0]].add((t["s"]["value"], t["o"]["value"]))
-                entities.add(t["s"]["value"])
-                entities.add(t["o"]["value"])
+                temp_triples.add((t["s"]["value"], t["o"]["value"]))
+            temp_triples = list(temp_triples)
+            random.shuffle(temp_triples)
+
+            triples[r[0]] = set()
+            for t in temp_triples[0:min(len(temp_triples), r[4])]:
+                triples[r[0]].add((t[0], t[1]))
+                entities.add(t[0])
+                entities.add(t[1])
 
     pickle.dump(triples, open(args.triples, "wb"))
     pickle.dump(rel_3si, open(args.rel_3si, "wb"))
