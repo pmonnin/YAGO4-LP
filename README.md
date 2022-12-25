@@ -1,6 +1,6 @@
 # YAGO4-LP
 
-Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/``, ``YAGO4-44k/``, and ``YAGO4-77k``.
+Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/``, ``YAGO4-44k/``, ``YAGO4-77k``, and ``YAGO4-27k``
 
 * ``rel2id.txt``: tab-separated file in which each line associates a relation URI to its equivalent ID
 * ``rel2id.pkl``: pickle file containing a dictionary associating a relation URI to its equivalent ID
