@@ -344,7 +344,7 @@ def main():
         csvreader = csv.reader(csvfile, delimiter=',')
         next(csvreader)
         for r in csvreader:
-            if r[4] == "True":
+            if int(r[4]) > 0:
                 r2dom[r[0]] = r[1]
                 r_id2dom_id[rel2id[r[0]]] = class2id[r[1]]
                 r2range[r[0]] = r[2]
