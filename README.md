@@ -1,5 +1,9 @@
 # YAGO4-LP
 
+[![DOI](https://zenodo.org/badge/576727654.svg)](https://zenodo.org/badge/latestdoi/576727654)
+
+## Description
+
 Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/``, ``YAGO4-44k/``, ``YAGO4-77k``, ``YAGO4-27k``, and ``YAGO4-19k``:
 
 * ``rel2id.txt``: tab-separated file in which each line associates a relation URI to its equivalent ID
@@ -56,7 +60,7 @@ Link prediction datasets based on YAGO4 with the following files in ``YAGO4-22k/
 
 The following commands have been used to build the dataset:
 
-## 1. ``get_rel_info.py``
+### 1. ``get_rel_info.py``
 
 ```python
 python src/get_rel_info.py --output data/yago-relations.csv
@@ -74,7 +78,7 @@ Output:
 
 We selected some relations of interest (with their number of triples set > 0 in ``YAGO4-XXk/yago-relations.csv``).
 
-## 2. ``get_rel_triples.py``
+### 2. ``get_rel_triples.py``
 
 ```python
 python src/get_rel_triples.py --relations data/yago-relations.csv --triples data/triples.pkl --rel_3si data/rel_3si.pkl --batches 5 --entities data/entities_in_rels.pkl
@@ -99,7 +103,7 @@ rel_3si["symmetric_predicates"] = set(symmetricpredicate1, symmetricpredicate2, 
 entities_batches[batch number] = list(entity1, entity2, ...)
 ```
 
-## 3. ``get_additional_triples.py``
+### 3. ``get_additional_triples.py``
 
 ```python
 python src/get_additional_triples.py --batch 0 --entities data/entities_in_rels.pkl --triples data/additional_triples_b0.pkl
@@ -118,7 +122,7 @@ Output
 triples = set(tuple(subject1, predicate1, object1), tuple(subject2, predicate2, object2, ...)
 ```
 
-## 4. ``merge_additional_triples.py``
+### 4. ``merge_additional_triples.py``
 
 ```python
 python src/merge_additional_triples.py --additional_triples data/additional_triples_b* --output_triples data/additional_triples.pkl --output_additional_rels data/additional_rels.csv
@@ -137,7 +141,7 @@ triples = set(tuple(subject1, predicate1, object1), tuple(subject2, predicate2, 
 
 We used this file to exclude ``rdf:type``, ``owl:sameAs``, and ``schema:image`` to avoid such triples in the train set.
 
-## 5. ``clean_additional_triples.py``
+### 5. ``clean_additional_triples.py``
 
 ```python
 python src/clean_additional_triples.py --additional_triples data/additional_triples.pkl --output_triples data/cleaned_additional_triples.pkl --additional_rels data/additional_rels.csv --batches 5 --entities data/additional_entities.pkl
@@ -155,7 +159,7 @@ triples = set(tuple(subject1, predicate1, object1), tuple(subject2, predicate2, 
 entities_batches[batch number] = list(entity1, entity2, ...)
 ```
 
-## 6. ``query_types.py``
+### 6. ``query_types.py``
 
 ```python
 python src/get_entity_types.py --batch 0 --entities data/entities_in_rels.pkl --entity_types data/types_entities_in_rel_b0.pkl
@@ -178,7 +182,7 @@ Output:
 entity_types[entity] = set(type1, type2, ...)
 ```
 
-## 7. ``merge_types.py``
+### 7. ``merge_types.py``
 
 ```python
 python src/merge_types.py --entity_types data/types_* --output_entity_types data/entity_types.pkl --output_types data/all_types.pkl
@@ -196,7 +200,7 @@ entity_types[entity] = set(type1, type2, ...)
 all_types = set(type1, type2, type3, ...)
 ```
 
-## 8. ``get_superclasses.py``
+### 8. ``get_superclasses.py``
 
 ```python
 python src/get_superclasses.py --types data/all_types.pkl --superclasses data/superclasses.pkl
@@ -212,7 +216,7 @@ superclasses[type1] = set(superclass1, superclass2, superclass3, ...)
 ```
 Note that superclasses are computed taking into account the transitive closure of the subsumption relation
 
-## 9. ``prepare_dataset.py``
+### 9. ``prepare_dataset.py``
 
 ```python
 python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples data/triples.pkl --additional_triples data/cleaned_additional_triples.pkl --superclasses data/superclasses.pkl --rel_3si data/rel_3si.pkl --relations data/yago-relations.csv --output YAGO4-XXk
@@ -220,3 +224,18 @@ python src/prepare_dataset.py --entity_types data/entity_types.pkl --rel_triples
 
 Build the YAGO4-XXk dataset whose files are described at the beginning of this document.
 
+## Citing
+
+```bibtex
+@dataset{pierre_monnin_2023_7526244,
+  author       = {Pierre Monnin and
+                  Nicolas Hubert},
+  title        = {YAGO4-LP},
+  month        = jan,
+  year         = 2023,
+  publisher    = {Zenodo},
+  version      = {v1.0.0},
+  doi          = {10.5281/zenodo.7526244},
+  url          = {https://doi.org/10.5281/zenodo.7526244}
+}
+```
