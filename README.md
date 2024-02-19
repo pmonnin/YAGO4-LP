@@ -1,6 +1,6 @@
 # YAGO4-LP
 
-[![DOI](https://zenodo.org/badge/576727654.svg)](https://zenodo.org/badge/latestdoi/576727654)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10677792.svg)](https://doi.org/10.5281/zenodo.10677792)
 
 ## Description
 
