@@ -1,5 +1,6 @@
 import argparse
 import csv
+import math
 import pickle
 import random
 
@@ -18,7 +19,12 @@ def build_train_valid_test_sets(rel_triples, additional_triples, rel_3si):
         valid_set |= set(triples[train_upper_bound+1:valid_upper_bound])
         test_set |= set(triples[valid_upper_bound+1:len(triples)])
 
-    train_set |= additional_triples
+    for t in additional_triples:
+        if t not in valid_set and t not in train_set:
+            train_set.add(t)
+
+    train_set -= valid_set
+    train_set -= test_set
 
     # Avoid leakage
     for r in rel_triples:
